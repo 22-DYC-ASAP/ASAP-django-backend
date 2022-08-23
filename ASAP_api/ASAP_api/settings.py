@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure--a)9=w@579+=8$klt(x!#b(hbu@!)!f3&8yn#t7b^9s%h+ee^5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'wound',
+    
 ]
 
 MIDDLEWARE = [
@@ -76,7 +80,7 @@ WSGI_APPLICATION = 'ASAP_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 
@@ -123,3 +127,14 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#미디어 파일을 관리할 루트 media 디렉터리
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#각 media file에 대한 URL prefix
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_DIRS = [
+	os.path.join(BASE_DIR, 'ASAP_api', 'media', 'static'),
+    ]
